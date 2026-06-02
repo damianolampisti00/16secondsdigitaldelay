@@ -1,6 +1,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include <cmath>
 
 class DryWet
 {
@@ -30,7 +31,7 @@ public:
 		drySignal.setSize(0, 0);
 	}
 
-	void copyDrySignal(const AudioBuffer<float>& srcBuffer)
+	void copyDrySignal(const juce::AudioSampleBuffer& srcBuffer)
 	{
 		auto numCh = srcBuffer.getNumChannels();
 		auto numSmp = srcBuffer.getNumSamples();
@@ -39,7 +40,7 @@ public:
 			drySignal.copyFrom(ch, 0, srcBuffer, ch, 0, numSmp);
 	}
 
-	void merge(AudioBuffer<float>& destBuffer)
+	void merge(juce::AudioSampleBuffer& destBuffer)
 	{
 		auto numCh = destBuffer.getNumChannels();
 		auto numSmp = destBuffer.getNumSamples();
@@ -60,15 +61,15 @@ public:
 private:
 	void updateInternalState()
 	{
-		wetLevel.setTargetValue(sqrt(dryWetRatio));
-		dryLevel.setTargetValue(sqrt(1.0f - dryWetRatio));
+		wetLevel.setTargetValue(std::sqrt(dryWetRatio));
+		dryLevel.setTargetValue(std::sqrt(1.0f - dryWetRatio));
 	}
 
 	float dryWetRatio;
-	SmoothedValue<float,ValueSmoothingTypes::Linear> dryLevel;
-	SmoothedValue<float,ValueSmoothingTypes::Linear> wetLevel;
+	juce::SmoothedValue<float> dryLevel;
+	juce::SmoothedValue<float> wetLevel;
 
-	AudioBuffer<float> drySignal;
+	juce::AudioSampleBuffer drySignal;
 
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(DryWet)
 };

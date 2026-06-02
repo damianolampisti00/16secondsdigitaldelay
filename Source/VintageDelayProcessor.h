@@ -16,7 +16,7 @@ public:
 
     void prepareToPlay(double sampleRate, int samplesPerBlock);
     void releaseResources();
-    void processBlock(juce::AudioBuffer<float>& buffer);
+    void processBlock(juce::AudioSampleBuffer& buffer);
 
     // Setters for parameters
     void setLoopState(LoopState state);

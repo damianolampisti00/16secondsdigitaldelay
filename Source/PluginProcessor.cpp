@@ -134,7 +134,7 @@ bool _16secondsdigitaldelayAudioProcessor::isBusesLayoutSupported (const BusesLa
 }
 #endif
 
-void _16secondsdigitaldelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
+void _16secondsdigitaldelayAudioProcessor::processBlock (juce::AudioSampleBuffer& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();

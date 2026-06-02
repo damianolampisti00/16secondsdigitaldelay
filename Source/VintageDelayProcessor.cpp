@@ -33,7 +33,7 @@ void VintageDelayProcessor::releaseResources()
     dryWetter.releaseResources();
 }
 
-void VintageDelayProcessor::processBlock(juce::AudioBuffer<float>& buffer)
+void VintageDelayProcessor::processBlock(juce::AudioSampleBuffer& buffer)
 {
     const int numChannels = buffer.getNumChannels();
     const int numSamples = buffer.getNumSamples();
